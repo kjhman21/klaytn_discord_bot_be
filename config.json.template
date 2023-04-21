@@ -1,0 +1,29 @@
+{
+	"clientId": "1234456789123456789",
+	"clientSecret":"",
+	"guildId": "1234567891234567890",
+	"token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+
+	"feUrl":"http://localhost:3000",
+	"holderClasses": [
+		{"limit":1, "role":"fish", "roleId": "1098097521412288574"},
+		{"limit":100, "role":"tuna", "roleId": "1097681836823564439"},
+		{"limit":10000, "role":"shark", "roleId": "1098097420719620211"},
+		{"limit":10000000, "role":"unicorn", "roleId": "1098097475077816360"}
+	],
+	"verifyMethod": {
+		"supportedMethods":["KLAY", "KIP-7", "KIP-17"],
+		"method":"KLAY",
+		"contractAddress":""
+	},
+	"DB": {
+		"enabled":true,
+		"sync":1,
+		"name":"discord_bot",
+		"user":"user",
+		"password":"password",
+		"host":"localhost",
+		"dialect":"postgres"
+	},
+	"port":4001
+}
