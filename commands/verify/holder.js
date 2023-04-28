@@ -3,8 +3,8 @@ const { clientId, feUrl } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('verify-holder')
-		.setDescription('Verify you are a holder!'),
+		.setName('verify')
+		.setDescription('Verify you are a KLAY holder!'),
 	async execute(interaction) {
         const row = new ActionRowBuilder()
             .addComponents(
