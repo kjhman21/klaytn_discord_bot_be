@@ -2,7 +2,7 @@ const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
 const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
-const { guildId, feUrl, holderClasses, verifyMethod } = require('./config.json');
+const { channelId, guildId, feUrl, holderClasses, verifyMethod } = require('./config.json');
 const Caver = require('caver-js');
 const { client } = require('./discord_bot');
 var cors = require('cors');
@@ -16,8 +16,7 @@ var whitelist = [feUrl];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
+      callback(null, true) } else {
       callback(new Error('Not allowed by CORS'))
     }
   }
@@ -70,7 +69,6 @@ app.get('/', async ({ query }, response) => {
 			});
 
 			result = await userResult.body.json();
-			console.log('result', result)
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error
 			// tokenResponseData.statusCode will be 401
@@ -159,11 +157,13 @@ app.post('/', async (req, res) => {
 		}
 
 		// Put the message to the verifier channel
-		let welcomembed = new EmbedBuilder()
-			.setAuthor(`${member.user.tag} got role of ${role.role}!`, member.user.avatarURL())
-			.setDescription("got the role!!!")
-			.setColor("FF0000");
-		guild.channels.cache.get(channelId).send(welcomembed)
+		let member = await guild.members.fetch(userId);
+		let embed = new EmbedBuilder()
+			.setColor(0x0099FF)
+			.setTitle('Role Updated')
+			.setAuthor({name:`Klaytn PoH Bot`})
+			.setDescription(`${member.user.username} got the role of ${role.role}!`);
+		guild.channels.cache.get(channelId).send({embeds:[embed]})
 			.catch((err) => console.log(err));
 
 		// update database.
