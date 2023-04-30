@@ -156,8 +156,15 @@ app.post('/', async (req, res) => {
 			console.log(`role added successfully. userId:${userId}, role:${role.roleId}, address:${address}`)
 		} else {
 			console.log(`role is not added because the balance is not in the range. balance=${balance}, address=${address}`)
-
 		}
+
+		// Put the message to the verifier channel
+		let welcomembed = new Discord.MessageEmbed()
+			.setAuthor(`${member.user.tag} got role of ${role.role}!`, member.user.avatarURL())
+			.setDescription("got the role!!!")
+			.setColor("FF0000");
+		member.guild.channels.cache.get(channelId).send(welcomembed)
+			.catch((err) => console.log(err));
 
 		// update database.
 		if(DB.enabeld) {

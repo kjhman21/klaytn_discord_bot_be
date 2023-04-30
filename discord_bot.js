@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+const { token, channelId } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -24,6 +24,15 @@ for (const folder of commandFolders) {
 }
 client.once(Events.ClientReady, () => {
 	console.log('Ready!');
+});
+
+client.on(Events.GuildMemberAdd, async (member) => {
+    let welcomembed = new Discord.MessageEmbed()
+        .setAuthor(`${member.user.tag} just joined!`, member.user.avatarURL())
+        .setDescription("Welcome to Klaytn Official Discord Server! Please run `/verify` to get a holder role!")
+        .setColor("FF0000");
+    member.guild.channels.cache.get(channelId).send(welcomembed)
+        .catch((err) => console.log(err));
 });
 
 client.on(Events.InteractionCreate, async interaction => {
