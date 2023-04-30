@@ -163,7 +163,7 @@ app.post('/', async (req, res) => {
 			.setAuthor(`${member.user.tag} got role of ${role.role}!`, member.user.avatarURL())
 			.setDescription("got the role!!!")
 			.setColor("FF0000");
-		member.guild.channels.cache.get(channelId).send(welcomembed)
+		guild.channels.cache.get(channelId).send(welcomembed)
 			.catch((err) => console.log(err));
 
 		// update database.
