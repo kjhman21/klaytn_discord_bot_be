@@ -1,7 +1,7 @@
 const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { guildId, feUrl, holderClasses, verifyMethod } = require('./config.json');
 const Caver = require('caver-js');
 const { client } = require('./discord_bot');
@@ -159,7 +159,7 @@ app.post('/', async (req, res) => {
 		}
 
 		// Put the message to the verifier channel
-		let welcomembed = new Discord.MessageEmbed()
+		let welcomembed = new EmbedBuilder()
 			.setAuthor(`${member.user.tag} got role of ${role.role}!`, member.user.avatarURL())
 			.setDescription("got the role!!!")
 			.setColor("FF0000");
